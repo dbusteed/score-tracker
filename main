@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "starting node server"
+node server.js &
+
+
+echo "starting keyboard client"
+./keyboard_client.py > /dev/null 2>&1

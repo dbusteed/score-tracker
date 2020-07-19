@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title>score keeper</title>
+  <link rel="stylesheet" href='./style.css'>
+</head>
+<body>
+  <div id="main">
+    <div class="main-buttons" onclick="showScores()">scores</div>
+    <div class="main-buttons" onclick="showControls()">controls</div>
+  </div>
+
+  <div id="scores">
+    <div id="score-box">
+      <span class="score-span" id="red"></span>
+      <span class="score-span" id="blue"></span>
+    </div>
+  </div>
+
+  <div id="controls">
+    <div class="top-buttons buttons">
+      <div onclick="showMain()" class="big-button plain">menu</div>
+      <div onclick="reset()" id="reset" class="big-button plain">reset game</div>
+    </div>
+    <div class="mid-buttons buttons">
+      <div onclick="dec('red')" class="big-button red">-1</div>
+      <div onclick="dec('blue')" class="big-button blue">-1</div>
+    </div>
+    <div class="bot-buttons buttons">
+      <div onclick="inc('red', 'blue')" class="big-button red">+1</div>
+      <div onclick="inc('blue', 'red')" class="big-button blue">+1</div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="./client.js"></script>
+
+</body>
+</html>
