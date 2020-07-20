@@ -61,6 +61,8 @@ if not connected:
     print('couldnt connect to server, exitting')
     exit(1)
 
+print('use HOME, HOME, Ctrl^C to quit')
+
 listenting = True
 while listenting:
     key = readkey()
