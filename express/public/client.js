@@ -15,6 +15,14 @@ $(function() {
       document.getElementById("red").style["text-decoration"] = 'none'
       document.getElementById("blue").style["text-decoration"] = 'underline'
     }
+
+    if(scores.winner == 'red') {
+      document.getElementById("scores").style["backgroundColor"] = '#FF9797'
+    } else if (scores.winner == 'blue') {
+      document.getElementById("scores").style["backgroundColor"] = '#9797FF'
+    } else {
+      document.getElementById("scores").style["backgroundColor"] = 'ivory'
+    }
   
   }
 
@@ -60,8 +68,8 @@ function inc(x, y) {
 	socket.emit('inc', {'x': x, 'y': y})
 }
 
-function dec(x) {
-  socket.emit('dec', x)
+function dec(x, y) {
+  socket.emit('dec', {'x': x, 'y': y})
 }
 
 function reset() {

@@ -15,7 +15,7 @@ let teams = ['red', 'blue']
 let scores = {
   'red': 0,
   'blue': 0,
-  'game': true,
+  'winner': '',
   'serve': teams[Math.floor(Math.random() * teams.length)]
 }
 
@@ -25,31 +25,27 @@ io.on('connection', socket => {
   io.emit('scoresUpdate', scores)
 
   socket.on('inc', obj => {
-    if(scores.game) {
-      
-      scores[obj.x] = scores[obj.x] + 1
+    scores[obj.x] = scores[obj.x] + 1
 
-      if( scores[obj.x] >= 10 && scores[obj.y] >= 10 ) {
-        scores.serve = (scores.serve == 'red' ? 'blue' : 'red')
-      } else if( (scores[obj.x] + scores[obj.y]) % 2 == 0 ) {
-        scores.serve = (scores.serve == 'red' ? 'blue' : 'red')
-      }
-
-      if(scores[obj.x] > 10 && (scores[obj.x] >= (scores[obj.y]+2))) {
-        // io.emit('gameOver', {winner: obj.x, loser: obj.y})
-        scores.game = false
-      }
-      io.emit('scoresUpdate', scores)
-    
+    if( scores[obj.x] >= 10 && scores[obj.y] >= 10 ) {
+      scores.serve = (scores.serve == 'red' ? 'blue' : 'red')
+    } else if( (scores[obj.x] + scores[obj.y]) % 2 == 0 ) {
+      scores.serve = (scores.serve == 'red' ? 'blue' : 'red')
     }
+
+    if(scores[obj.x] > 10 && (scores[obj.x] >= (scores[obj.y]+2))) {
+      scores.winner = obj.x
+    }
+    io.emit('scoresUpdate', scores)
   })
 
-  socket.on('dec', x => {
-    if(scores.game) {
-      if(scores[x] > 0) {
-        scores[x] = scores[x] - 1
-        io.emit('scoresUpdate', scores)
+  socket.on('dec', obj => {
+    if(scores[obj.x] > 0) {
+      scores[obj.x] = scores[obj.x] - 1
+      if(!(scores[obj.x] > 10 && (scores[obj.x] >= (scores[obj.y]+2)))) {
+        scores.winner = ''
       }
+      io.emit('scoresUpdate', scores)
     }
   })
 
@@ -57,7 +53,7 @@ io.on('connection', socket => {
     scores = {
       'red': 0,
       'blue': 0,
-      'game': true,
+      'winner': '',
       'serve': teams[Math.floor(Math.random() * teams.length)]
     }
     io.emit('scoresUpdate', scores)
