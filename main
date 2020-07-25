@@ -17,7 +17,7 @@ do
         -h | --help)
             echo -e "${YELLOW}OPTIONS${NC}"
             echo -e "   -h, --help      this page"
-            echo -e "   -k, --keys      start WITHOUT keyboard client"
+            echo -e "   -k, --keys      start with keyboard client"
             exit 0
             shift
             ;;
