@@ -13,10 +13,10 @@ def incBlue():
     sio.emit('inc', {'x': 'blue', 'y': 'red'})
 
 def decRed():
-    sio.emit('dec', 'red')
+    sio.emit('dec', {'x': 'red', 'y': 'blue'})
 
 def decBlue():
-    sio.emit('dec', 'blue')
+    sio.emit('dec', {'x': 'blue', 'y': 'red'})
 
 def reset():
     sio.emit('reset')
